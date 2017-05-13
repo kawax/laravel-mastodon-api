@@ -41,7 +41,7 @@ class MastodonController
     {
         $client_name = 'my-app';
         $redirect_uris = 'https://my-instance/callback';
-        $scopes = 'read';
+        $scopes = 'read write follow';
         
         $app_info = Mastodon::domain('https://example.com')
                             ->app_register($client_name, $redirect_uris, $scopes);
@@ -58,6 +58,8 @@ class MastodonController
 
 ### OAuth authentication
 Use https://github.com/kawax/socialite-mastodon
+
+Save account info.(`id`, `token`, `username`, `acct`...and more.)
 
 ### Get statuses
 ```php

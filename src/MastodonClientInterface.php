@@ -85,6 +85,13 @@ interface MastodonClientInterface
     public function api_version(string $api_version);
 
     /**
+     * @param string $api_base
+     *
+     * @return $this
+     */
+    public function api_base(string $api_base);
+
+    /**
      * @param int $account_id
      * @param int $limit
      * @param int $since_id

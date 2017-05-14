@@ -55,6 +55,7 @@ class MastodonTest extends PHPUnit_Framework_TestCase
     public function testCall()
     {
         $response = $this->mastodon->api_version('v1')
+                                   ->api_base('/api/')
                                    ->domain('https://example.com')
                                    ->token('token')
                                    ->call('get', '/');
@@ -150,10 +151,11 @@ class MastodonTest extends PHPUnit_Framework_TestCase
         $e = $d = '';
 
         $this->mastodon->token('test')
-                       ->streaming('https://example.com/api/v1/streaming/public', function ($event, $data) use (&$e, &$d) {
-                           $e = $event;
-                           $d = $data;
-                       });
+                       ->streaming('https://example.com/api/v1/streaming/public',
+                           function ($event, $data) use (&$e, &$d) {
+                               $e = $event;
+                               $d = $data;
+                           });
 
         $this->assertEquals('update', $e);
         $this->assertJson('{"test": "test"}', json_encode($d));

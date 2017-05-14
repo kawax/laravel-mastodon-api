@@ -38,6 +38,11 @@ class MastodonClient implements MastodonClientInterface
     protected $token;
 
     /**
+     * @var string
+     */
+    protected $api_base = '/api/';
+
+    /**
      * Apps constructor.
      *
      */
@@ -105,7 +110,7 @@ class MastodonClient implements MastodonClientInterface
      */
     public function api_endpoint(): string
     {
-        return $this->domain . '/api/' . $this->api_version;
+        return $this->domain . $this->api_base . $this->api_version;
     }
 
     /**
@@ -152,6 +157,18 @@ class MastodonClient implements MastodonClientInterface
     public function api_version(string $api_version)
     {
         $this->api_version = $api_version;
+
+        return $this;
+    }
+
+    /**
+     * @param string $api_base
+     *
+     * @return $this
+     */
+    public function api_base(string $api_base)
+    {
+        $this->api_base = $api_base;
 
         return $this;
     }

@@ -48,9 +48,9 @@ class MastodonController
 
         dd($app_info);
         //[
-        //    'id',
-        //    'client_id',
-        //    'client_secret'
+        //    'id' => '',
+        //    'client_id' => '',
+        //    'client_secret' => '',
         //]
      }
 }
@@ -68,6 +68,15 @@ $statuses = Mastodon::domain('https://example.com')
                     ->status_list($account_id);
 
 dd($statuses);
+```
+
+### Get one status
+```php
+$status = Mastodon::domain('https://example.com')
+                  ->token('token')
+                  ->status_get($status_id);
+
+dd($status);
 ```
 
 ### Post status

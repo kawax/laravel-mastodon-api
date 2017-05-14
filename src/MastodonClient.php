@@ -43,7 +43,7 @@ class MastodonClient implements MastodonClientInterface
     protected $api_base = '/api/';
 
     /**
-     * Apps constructor.
+     * constructor.
      *
      */
     public function __construct()

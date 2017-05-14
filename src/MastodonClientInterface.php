@@ -58,6 +58,8 @@ interface MastodonClientInterface
 
     /**
      * @param ClientInterface $client
+     *
+     * @return $this
      */
     public function setClient(ClientInterface $client);
 

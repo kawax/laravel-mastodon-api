@@ -110,10 +110,14 @@ class MastodonClient implements MastodonClientInterface
 
     /**
      * @param ClientInterface $client
+     *
+     * @return $this
      */
     public function setClient(ClientInterface $client)
     {
         $this->client = $client;
+
+        return $this;
     }
 
     /**

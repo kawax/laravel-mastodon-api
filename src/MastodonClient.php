@@ -8,12 +8,14 @@ use GuzzleHttp\ClientInterface;
 use Revolution\Mastodon\Traits\AppsTrait;
 use Revolution\Mastodon\Traits\AccountsTrait;
 use Revolution\Mastodon\Traits\StatusesTrait;
+use Revolution\Mastodon\Traits\StreamingTrait;
 
 class MastodonClient implements MastodonClientInterface
 {
     use AppsTrait;
     use AccountsTrait;
     use StatusesTrait;
+    use StreamingTrait;
 
     /**
      * @var string
@@ -121,7 +123,7 @@ class MastodonClient implements MastodonClientInterface
      */
     public function domain(string $domain)
     {
-        $this->domain = $domain;
+        $this->domain = trim($domain, '/');
 
         return $this;
     }

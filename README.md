@@ -130,14 +130,22 @@ use Revolution\Mastodon\MastodonClient;
 $mastodon = new MastodonClient();
 
 $statuses = $mastodon->domain('https://example.com')
-                    ->token('token')
-                    ->status_list($account_id);
+                     ->token('token')
+                     ->status_list($account_id);
 ```
 
 
 ### Other methods
 Check public methods in `MastodonClientInterface.php`
 
+## Streaming API
+Edit `$token` and `$url` in streaming_example.php
+
+```
+php ./streaming_example.php
+```
+
+`Ctrl+C` to quit.
 
 ## LICENSE
 MIT  

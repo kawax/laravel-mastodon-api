@@ -140,4 +140,22 @@ class MastodonTest extends PHPUnit_Framework_TestCase
 
         $this->assertJson('{"test": "test"}', json_encode($response));
     }
+
+    public function testStreaming()
+    {
+        $res = 'event: update' . PHP_EOL . 'data: ' . json_encode(['test' => 'test']);
+
+        $this->setClientHandler($res);
+
+        $e = $d = '';
+
+        $this->mastodon->token('test')
+                       ->streaming('https://example.com/api/v1/streaming/public', function ($event, $data) use (&$e, &$d) {
+                           $e = $event;
+                           $d = $data;
+                       });
+
+        $this->assertEquals('update', $e);
+        $this->assertJson('{"test": "test"}', json_encode($d));
+    }
 }

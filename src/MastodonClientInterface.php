@@ -105,4 +105,10 @@ interface MastodonClientInterface
      * @return array
      */
     public function status_get(int $status_id): array;
+
+    /**
+     * @param string   $url
+     * @param callable $callback (string $event, string $data)
+     */
+    public function streaming(string $url, callable $callback);
 }

@@ -83,7 +83,7 @@ dd($status);
 ```php
 Mastodon::domain('https://example.com')->token('token');
 $response = Mastodon::status_post('test1');
-$response = Mastodon::status_post('test2');
+$response = Mastodon::status_post('test2', ['visibility' => 'unlisted']);
 
 dd($response);
 ```

@@ -2,7 +2,7 @@
 
 namespace Revolution\Mastodon\tests;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
 use Revolution\Mastodon\MastodonClient;
 
@@ -11,7 +11,7 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 
-class MastodonTest extends PHPUnit_Framework_TestCase
+class MastodonTest extends TestCase
 {
     /**
      * @var MastodonClient

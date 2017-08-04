@@ -1,7 +1,10 @@
 {
   "name": "revolution/laravel-mastodon-api",
   "description": "Mastodon API for Laravel",
-  "keywords": ["mastodon", "laravel"],
+  "keywords": [
+    "mastodon",
+    "laravel"
+  ],
   "license": "MIT",
   "require": {
     "php": ">=7.0.0",
@@ -27,5 +30,15 @@
       "name": "kawax",
       "email": "kawaxbiz@gmail.com"
     }
-  ]
+  ],
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Revolution\\Mastodon\\Providers\\MastodonServiceProvider"
+      ],
+      "aliases": {
+        "Mastodon": "Revolution\\Mastodon\\Facades\\Mastodon"
+      }
+    }
+  }
 }

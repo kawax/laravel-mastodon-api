@@ -4,6 +4,8 @@ namespace Revolution\Mastodon\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
+use Revolution\Mastodon\MastodonClient;
+
 class Mastodon extends Facade
 {
     /**
@@ -13,6 +15,6 @@ class Mastodon extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return \Revolution\Mastodon\MastodonClient::class;
+        return MastodonClient::class;
     }
 }

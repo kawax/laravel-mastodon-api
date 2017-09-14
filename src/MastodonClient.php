@@ -5,17 +5,12 @@ namespace Revolution\Mastodon;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 
-use Revolution\Mastodon\Traits\AppsTrait;
-use Revolution\Mastodon\Traits\AccountsTrait;
-use Revolution\Mastodon\Traits\StatusesTrait;
-use Revolution\Mastodon\Traits\StreamingTrait;
-
 class MastodonClient implements MastodonClientInterface
 {
-    use AppsTrait;
-    use AccountsTrait;
-    use StatusesTrait;
-    use StreamingTrait;
+    use Traits\AppsTrait;
+    use Traits\AccountsTrait;
+    use Traits\StatusesTrait;
+    use Traits\StreamingTrait;
 
     /**
      * @var string
@@ -45,10 +40,11 @@ class MastodonClient implements MastodonClientInterface
     /**
      * constructor.
      *
+     * @param Client $client
      */
-    public function __construct()
+    public function __construct(Client $client)
     {
-        $this->client = new Client();
+        $this->client = $client;
     }
 
     /**
@@ -60,7 +56,7 @@ class MastodonClient implements MastodonClientInterface
      */
     public function call(string $method, string $api, array $options = []): array
     {
-        $url = $this->api_endpoint() . $api;
+        $url = $this->apiEndpoint() . $api;
 
         if (!empty($this->token)) {
             array_set($options, 'headers.Authorization', 'Bearer ' . $this->token);
@@ -108,17 +104,28 @@ class MastodonClient implements MastodonClientInterface
     /**
      * @return string
      */
-    public function api_endpoint(): string
+    public function apiEndpoint(): string
     {
         return $this->domain . $this->api_base . $this->api_version;
     }
 
     /**
+     * @deprecated PSR
+     * @see apiEndpoint()
+     *
+     * @return string
+     */
+    public function api_endpoint(): string
+    {
+        return $this->apiEndpoint();
+    }
+
+    /**
      * @param ClientInterface $client
      *
-     * @return $this
+     * @return MastodonClientInterface
      */
-    public function setClient(ClientInterface $client)
+    public function setClient(ClientInterface $client): MastodonClientInterface
     {
         $this->client = $client;
 
@@ -128,9 +135,9 @@ class MastodonClient implements MastodonClientInterface
     /**
      * @param string $domain
      *
-     * @return $this
+     * @return MastodonClientInterface
      */
-    public function domain(string $domain)
+    public function domain(string $domain): MastodonClientInterface
     {
         $this->domain = trim($domain, '/');
 
@@ -140,9 +147,9 @@ class MastodonClient implements MastodonClientInterface
     /**
      * @param string $token
      *
-     * @return $this
+     * @return MastodonClientInterface
      */
-    public function token(string $token)
+    public function token(string $token): MastodonClientInterface
     {
         $this->token = $token;
 
@@ -152,9 +159,9 @@ class MastodonClient implements MastodonClientInterface
     /**
      * @param string $api_version
      *
-     * @return $this
+     * @return MastodonClientInterface
      */
-    public function api_version(string $api_version)
+    public function apiVersion(string $api_version): MastodonClientInterface
     {
         $this->api_version = $api_version;
 
@@ -162,15 +169,41 @@ class MastodonClient implements MastodonClientInterface
     }
 
     /**
+     * @deprecated PSR
+     * @see apiVersion()
+     *
+     * @param string $api_version
+     *
+     * @return MastodonClientInterface
+     */
+    public function api_version(string $api_version): MastodonClientInterface
+    {
+        return $this->apiVersion($api_version);
+    }
+
+    /**
      * @param string $api_base
      *
-     * @return $this
+     * @return MastodonClientInterface
      */
-    public function api_base(string $api_base)
+    public function apiBase(string $api_base): MastodonClientInterface
     {
         $this->api_base = $api_base;
 
         return $this;
+    }
+
+    /**
+     * @deprecated PSR
+     * @see apiBase()
+     *
+     * @param string $api_base
+     *
+     * @return MastodonClientInterface
+     */
+    public function api_base(string $api_base): MastodonClientInterface
+    {
+        return $this->apiBase($api_base);
     }
 
     /**

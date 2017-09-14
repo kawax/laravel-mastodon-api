@@ -27,8 +27,6 @@ class MastodonTest extends TestCase
     {
         parent::setUp();
 
-        $this->mastodon = new MastodonClient();
-
         $this->setClientHandler(json_encode(['test' => 'test']));
     }
 
@@ -44,7 +42,7 @@ class MastodonTest extends TestCase
         $handler = HandlerStack::create($mock);
         $client = new Client(['handler' => $handler]);
 
-        $this->mastodon->setClient($client);
+        $this->mastodon = new MastodonClient($client);
     }
 
     public function testMastodonInstance()
@@ -54,8 +52,8 @@ class MastodonTest extends TestCase
 
     public function testCall()
     {
-        $response = $this->mastodon->api_version('v1')
-                                   ->api_base('/api/')
+        $response = $this->mastodon->apiVersion('v1')
+                                   ->apiBase('/api/')
                                    ->domain('https://example.com')
                                    ->token('token')
                                    ->call('get', '/');
@@ -98,10 +96,10 @@ class MastodonTest extends TestCase
         $response = $this->mastodon->test();
     }
 
-    public function testAppRegister()
+    public function testCreateApp()
     {
         $response = $this->mastodon->domain('https://example.com')
-                                   ->app_register('', '', '');
+                                   ->createApp('', '', '');
 
         $this->assertJson('{"test": "test"}', json_encode($response));
     }
@@ -110,7 +108,7 @@ class MastodonTest extends TestCase
     {
         $response = $this->mastodon->domain('https://example.com')
                                    ->token('test')
-                                   ->verify_credentials();
+                                   ->verifyCredentials();
 
         $this->assertJson('{"test": "test"}', json_encode($response));
     }
@@ -119,7 +117,7 @@ class MastodonTest extends TestCase
     {
         $response = $this->mastodon->domain('https://example.com')
                                    ->token('test')
-                                   ->status_list(0);
+                                   ->statuses(0);
 
         $this->assertJson('{"test": "test"}', json_encode($response));
     }
@@ -128,7 +126,7 @@ class MastodonTest extends TestCase
     {
         $response = $this->mastodon->domain('https://example.com')
                                    ->token('test')
-                                   ->status_get(0);
+                                   ->status(0);
 
         $this->assertJson('{"test": "test"}', json_encode($response));
     }
@@ -137,7 +135,7 @@ class MastodonTest extends TestCase
     {
         $response = $this->mastodon->domain('https://example.com')
                                    ->token('test')
-                                   ->status_post('test');
+                                   ->createStatus('test');
 
         $this->assertJson('{"test": "test"}', json_encode($response));
     }

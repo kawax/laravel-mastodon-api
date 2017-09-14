@@ -4,6 +4,8 @@ namespace Revolution\Mastodon\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use GuzzleHttp\Client;
+
 use Revolution\Mastodon\MastodonClient;
 
 class MastodonServiceProvider extends ServiceProvider
@@ -31,7 +33,7 @@ class MastodonServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(MastodonClient::class, function ($app) {
-            return new MastodonClient();
+            return new MastodonClient(new Client());
         });
     }
 

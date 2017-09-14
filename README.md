@@ -14,6 +14,8 @@ composer require revolution/laravel-mastodon-api
 
 ### Laravel
 
+Not necessary for Laravel >= 5.5
+
 `config/app.php`
 
 ```
@@ -44,7 +46,7 @@ class MastodonController
         $scopes = 'read write follow';
         
         $app_info = Mastodon::domain('https://example.com')
-                            ->app_register($client_name, $redirect_uris, $scopes);
+                            ->createApp($client_name, $redirect_uris, $scopes);
 
         dd($app_info);
         //[
@@ -65,7 +67,7 @@ Save account info.(`id`, `token`, `username`, `acct`...and more.)
 ```php
 $statuses = Mastodon::domain('https://example.com')
                     ->token('token')
-                    ->status_list($account_id);
+                    ->statuses($account_id);
 
 dd($statuses);
 ```
@@ -74,7 +76,7 @@ dd($statuses);
 ```php
 $status = Mastodon::domain('https://example.com')
                   ->token('token')
-                  ->status_get($status_id);
+                  ->status($status_id);
 
 dd($status);
 ```
@@ -82,8 +84,8 @@ dd($status);
 ### Post status
 ```php
 Mastodon::domain('https://example.com')->token('token');
-$response = Mastodon::status_post('test1');
-$response = Mastodon::status_post('test2', ['visibility' => 'unlisted']);
+$response = Mastodon::createStatus('test1');
+$response = Mastodon::createStatus('test2', ['visibility' => 'unlisted']);
 
 dd($response);
 ```
@@ -93,16 +95,12 @@ dd($response);
 $response = Mastodon::domain('https://example.com')
                     ->token('token')
                     ->get('/timelines/public', ['local' => true]);
-
-dd($response);
 ```
 
 ```php
 $response = Mastodon::domain('https://example.com')
                     ->token('token')
                     ->post('/follows', ['uri' => '']);
-
-dd($response);
 ```
 
 ### Any API can call by `call` method
@@ -110,8 +108,6 @@ dd($response);
 $response = Mastodon::domain('https://example.com')
                     ->token('token')
                     ->call('DELETE', '/statuses/1');
-
-dd($response);
 ```
 
 ### Any request through Guzzle
@@ -140,7 +136,7 @@ $mastodon = new MastodonClient();
 
 $statuses = $mastodon->domain('https://example.com')
                      ->token('token')
-                     ->status_list($account_id);
+                     ->statuses($account_id);
 ```
 
 

@@ -14,17 +14,12 @@ interface MastodonClientInterface
      *
      * @return array
      */
-    public function app_register(
-        string $client_name,
-        string $redirect_uris,
-        string $scopes,
-        string $website = ''
-    ): array;
+    public function createApp(string $client_name, string $redirect_uris, string $scopes, string $website = ''): array;
 
     /**
      * @return array
      */
-    public function verify_credentials(): array;
+    public function verifyCredentials(): array;
 
     /**
      * @param string $method
@@ -54,42 +49,42 @@ interface MastodonClientInterface
     /**
      * @return string
      */
-    public function api_endpoint(): string;
+    public function apiEndpoint(): string;
 
     /**
      * @param ClientInterface $client
      *
-     * @return $this
+     * @return MastodonClientInterface
      */
-    public function setClient(ClientInterface $client);
+    public function setClient(ClientInterface $client): MastodonClientInterface;
 
     /**
      * @param string $domain
      *
-     * @return $this
+     * @return MastodonClientInterface
      */
-    public function domain(string $domain);
+    public function domain(string $domain): MastodonClientInterface;
 
     /**
      * @param string $token
      *
-     * @return $this
+     * @return MastodonClientInterface
      */
-    public function token(string $token);
+    public function token(string $token): MastodonClientInterface;
 
     /**
      * @param string $api_version
      *
-     * @return $this
+     * @return MastodonClientInterface
      */
-    public function api_version(string $api_version);
+    public function apiVersion(string $api_version): MastodonClientInterface;
 
     /**
      * @param string $api_base
      *
-     * @return $this
+     * @return MastodonClientInterface
      */
-    public function api_base(string $api_base);
+    public function apiBase(string $api_base): MastodonClientInterface;
 
     /**
      * @param int $account_id
@@ -98,7 +93,7 @@ interface MastodonClientInterface
      *
      * @return array
      */
-    public function status_list(int $account_id, int $limit = 40, int $since_id = null): array;
+    public function statuses(int $account_id, int $limit = 40, int $since_id = null): array;
 
     /**
      * @param string $status
@@ -106,14 +101,14 @@ interface MastodonClientInterface
      *
      * @return array
      */
-    public function status_post(string $status, array $options = []): array;
+    public function createStatus(string $status, array $options = []): array;
 
     /**
      * @param int $status_id
      *
      * @return array
      */
-    public function status_get(int $status_id): array;
+    public function status(int $status_id): array;
 
     /**
      * @param string   $url

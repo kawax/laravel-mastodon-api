@@ -38,6 +38,11 @@ class MastodonClient implements MastodonClientInterface
     protected $api_base = '/api/';
 
     /**
+     * @var mixed|\Psr\Http\Message\ResponseInterface
+     */
+    protected $response;
+
+    /**
      * constructor.
      *
      * @param Client $client
@@ -62,9 +67,9 @@ class MastodonClient implements MastodonClientInterface
             array_set($options, 'headers.Authorization', 'Bearer ' . $this->token);
         }
 
-        $response = $this->client->request($method, $url, $options);
+        $this->response = $this->client->request($method, $url, $options);
 
-        return json_decode($response->getBody(), true);
+        return json_decode(optional($this->response)->getBody(), true);
     }
 
     /**
@@ -204,6 +209,14 @@ class MastodonClient implements MastodonClientInterface
     public function api_base(string $api_base): MastodonClientInterface
     {
         return $this->apiBase($api_base);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResponse()
+    {
+        return $this->response;
     }
 
     /**

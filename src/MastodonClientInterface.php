@@ -87,6 +87,11 @@ interface MastodonClientInterface
     public function apiBase(string $api_base): MastodonClientInterface;
 
     /**
+     * @return mixed
+     */
+    public function getResponse();
+
+    /**
      * @param int $account_id
      * @param int $limit
      * @param int $since_id

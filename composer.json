@@ -9,7 +9,7 @@
   "require": {
     "php": ">=7.0.0",
     "guzzlehttp/guzzle": "^6.2",
-    "illuminate/support": "5.*"
+    "illuminate/support": "^5.5"
   },
   "require-dev": {
     "phpunit/phpunit": "6.*",

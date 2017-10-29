@@ -34,6 +34,11 @@ Not necessary for Laravel >= 5.5
 
 ### Registering an application
 
+#### By Web UI
+1. Go to your Mastodon's user preferences page.
+2. Go to development page.
+
+#### By API
 ```php
 use Mastodon;
 

@@ -48,7 +48,7 @@ trait StatusesTrait
      *
      * @return array
      */
-    public function createStatus(string $status, array $options = []): array
+    public function createStatus(string $status, array $options = null): array
     {
         $url = '/statuses';
 

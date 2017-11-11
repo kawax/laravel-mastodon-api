@@ -144,6 +144,23 @@ $statuses = $mastodon->domain('https://example.com')
                      ->statuses($account_id);
 ```
 
+### Macroable
+
+#### Register in AppServiceProvider.php
+
+```php
+    public function register()
+    {
+        \Mastodon::macro('instance', function () {
+            return $this->get('/instance');
+        });
+    }
+```
+
+#### Use somewhere
+```php
+$instance = Mastodon::domain($domain)->instance();
+```
 
 ### Other methods
 Check public methods in `MastodonClientInterface.php`

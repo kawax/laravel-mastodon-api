@@ -158,4 +158,16 @@ class MastodonTest extends TestCase
         $this->assertEquals('update', $e);
         $this->assertJson('{"test": "test"}', json_encode($d));
     }
+
+    public function testMacroable()
+    {
+        MastodonClient::macro('instance', function () {
+            return $this->get('/instance');
+        });
+
+        $mastodon = new MastodonClient(new Client());
+
+        $this->assertTrue(MastodonClient::hasMacro('instance'));
+        $this->assertTrue(is_callable(MastodonClient::class, 'instance'));
+    }
 }

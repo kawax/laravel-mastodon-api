@@ -5,12 +5,16 @@ namespace Revolution\Mastodon;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 
+use Illuminate\Support\Traits\Macroable;
+
 class MastodonClient implements MastodonClientInterface
 {
     use Traits\AppsTrait;
     use Traits\AccountsTrait;
     use Traits\StatusesTrait;
     use Traits\StreamingTrait;
+
+    use Macroable;
 
     /**
      * @var string

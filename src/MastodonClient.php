@@ -6,6 +6,8 @@ use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 
 use Illuminate\Support\Traits\Macroable;
+use BadMethodCallException;
+use Closure;
 
 class MastodonClient implements MastodonClientInterface
 {
@@ -239,6 +241,12 @@ class MastodonClient implements MastodonClientInterface
             return call_user_func_array([$this->client, $method], $parameters);
         }
 
-        throw new \BadMethodCallException(sprintf('Method [%s] does not exist.', $method));
+        if (static::hasMacro($method)) {
+            if (static::$macros[$method] instanceof Closure) {
+                return call_user_func_array(static::$macros[$method]->bindTo($this, static::class), $parameters);
+            }
+        }
+
+        throw new BadMethodCallException(sprintf('Method [%s] does not exist.', $method));
     }
 }

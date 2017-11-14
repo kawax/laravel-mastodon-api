@@ -149,7 +149,7 @@ $statuses = $mastodon->domain('https://example.com')
 #### Register in AppServiceProvider.php
 
 ```php
-    public function register()
+    public function boot()
     {
         \Mastodon::macro('instance', function () {
             return $this->get('/instance');

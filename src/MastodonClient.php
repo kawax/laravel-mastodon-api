@@ -5,11 +5,13 @@ namespace Revolution\Mastodon;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 
+use Revolution\Mastodon\Contracts\Factory;
+
 use Illuminate\Support\Traits\Macroable;
 use BadMethodCallException;
 use Closure;
 
-class MastodonClient implements MastodonClientInterface
+class MastodonClient implements Factory
 {
     use Traits\AppsTrait;
     use Traits\AccountsTrait;
@@ -134,9 +136,9 @@ class MastodonClient implements MastodonClientInterface
     /**
      * @param ClientInterface $client
      *
-     * @return MastodonClientInterface
+     * @return Factory
      */
-    public function setClient(ClientInterface $client): MastodonClientInterface
+    public function setClient(ClientInterface $client): Factory
     {
         $this->client = $client;
 
@@ -146,9 +148,9 @@ class MastodonClient implements MastodonClientInterface
     /**
      * @param string $domain
      *
-     * @return MastodonClientInterface
+     * @return Factory
      */
-    public function domain(string $domain): MastodonClientInterface
+    public function domain(string $domain): Factory
     {
         $this->domain = trim($domain, '/');
 
@@ -158,9 +160,9 @@ class MastodonClient implements MastodonClientInterface
     /**
      * @param string $token
      *
-     * @return MastodonClientInterface
+     * @return Factory
      */
-    public function token(string $token): MastodonClientInterface
+    public function token(string $token): Factory
     {
         $this->token = $token;
 
@@ -170,9 +172,9 @@ class MastodonClient implements MastodonClientInterface
     /**
      * @param string $api_version
      *
-     * @return MastodonClientInterface
+     * @return Factory
      */
-    public function apiVersion(string $api_version): MastodonClientInterface
+    public function apiVersion(string $api_version): Factory
     {
         $this->api_version = $api_version;
 
@@ -185,9 +187,9 @@ class MastodonClient implements MastodonClientInterface
      *
      * @param string $api_version
      *
-     * @return MastodonClientInterface
+     * @return Factory
      */
-    public function api_version(string $api_version): MastodonClientInterface
+    public function api_version(string $api_version): Factory
     {
         return $this->apiVersion($api_version);
     }
@@ -195,9 +197,9 @@ class MastodonClient implements MastodonClientInterface
     /**
      * @param string $api_base
      *
-     * @return MastodonClientInterface
+     * @return Factory
      */
-    public function apiBase(string $api_base): MastodonClientInterface
+    public function apiBase(string $api_base): Factory
     {
         $this->api_base = $api_base;
 
@@ -210,9 +212,9 @@ class MastodonClient implements MastodonClientInterface
      *
      * @param string $api_base
      *
-     * @return MastodonClientInterface
+     * @return Factory
      */
-    public function api_base(string $api_base): MastodonClientInterface
+    public function api_base(string $api_base): Factory
     {
         return $this->apiBase($api_base);
     }

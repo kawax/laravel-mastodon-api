@@ -163,7 +163,7 @@ $instance = Mastodon::domain($domain)->instance();
 ```
 
 ### Other methods
-Check public methods in `MastodonClientInterface.php`
+Check public methods in `Contracts/Factory.php`
 
 ## Streaming API
 Edit `$token` and `$url` in streaming_example.php

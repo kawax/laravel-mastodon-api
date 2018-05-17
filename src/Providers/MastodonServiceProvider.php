@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 
 use GuzzleHttp\Client;
 
+use Revolution\Mastodon\Contracts\Factory;
 use Revolution\Mastodon\MastodonClient;
 
 class MastodonServiceProvider extends ServiceProvider
@@ -32,7 +33,7 @@ class MastodonServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(MastodonClient::class, function ($app) {
+        $this->app->singleton(Factory::class, function ($app) {
             return new MastodonClient(new Client());
         });
     }
@@ -44,6 +45,6 @@ class MastodonServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return [MastodonClient::class];
+        return [Factory::class];
     }
 }

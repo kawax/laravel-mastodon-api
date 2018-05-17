@@ -4,7 +4,7 @@ namespace Revolution\Mastodon\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-use Revolution\Mastodon\MastodonClient;
+use Revolution\Mastodon\Contracts\Factory;
 
 class Mastodon extends Facade
 {
@@ -15,6 +15,6 @@ class Mastodon extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return MastodonClient::class;
+        return Factory::class;
     }
 }

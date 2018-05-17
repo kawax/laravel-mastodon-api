@@ -36,6 +36,8 @@ class MastodonServiceProvider extends ServiceProvider
         $this->app->singleton(Factory::class, function ($app) {
             return new MastodonClient(new Client());
         });
+
+        $this->app->alias(MastodonClient::class, Factory::class);
     }
 
     /**

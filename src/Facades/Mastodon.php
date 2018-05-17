@@ -4,6 +4,7 @@ namespace Revolution\Mastodon\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
+use Revolution\Mastodon\MastodonClient;
 use Revolution\Mastodon\Contracts\Factory;
 
 class Mastodon extends Facade

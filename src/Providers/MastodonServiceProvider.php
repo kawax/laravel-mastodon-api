@@ -37,7 +37,10 @@ class MastodonServiceProvider extends ServiceProvider
             return new MastodonClient(new Client());
         });
 
-        $this->app->alias(MastodonClient::class, Factory::class);
+        $this->app->alias(
+            Factory::class,
+            MastodonClient::class
+        );
     }
 
     /**

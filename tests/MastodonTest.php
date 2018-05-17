@@ -1,8 +1,6 @@
 <?php
 
-namespace Revolution\Mastodon\tests;
-
-use PHPUnit\Framework\TestCase;
+namespace Tests;
 
 use Revolution\Mastodon\MastodonClient;
 
@@ -10,6 +8,8 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
+
+use Mastodon;
 
 class MastodonTest extends TestCase
 {
@@ -169,5 +169,12 @@ class MastodonTest extends TestCase
 
         $this->assertTrue(MastodonClient::hasMacro('instance'));
         $this->assertTrue(is_callable(MastodonClient::class, 'instance'));
+    }
+
+    public function testResponse()
+    {
+        $res = Mastodon::getResponse();
+
+        $this->assertNull($res);
     }
 }

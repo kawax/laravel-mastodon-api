@@ -38,8 +38,8 @@ class MastodonServiceProvider extends ServiceProvider
         });
 
         $this->app->alias(
-            Factory::class,
-            MastodonClient::class
+            MastodonClient::class,
+            Factory::class
         );
     }
 

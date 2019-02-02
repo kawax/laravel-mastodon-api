@@ -2,6 +2,8 @@
 
 namespace Revolution\Mastodon;
 
+use Illuminate\Support\Arr;
+
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 
@@ -72,7 +74,7 @@ class MastodonClient implements Factory
         $url = $this->apiEndpoint() . $api;
 
         if (!empty($this->token)) {
-            array_set($options, 'headers.Authorization', 'Bearer ' . $this->token);
+            Arr::set($options, 'headers.Authorization', 'Bearer ' . $this->token);
         }
 
         $this->response = $this->client->request($method, $url, $options);

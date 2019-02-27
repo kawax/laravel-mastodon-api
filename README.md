@@ -3,31 +3,14 @@
 [![Build Status](https://travis-ci.org/kawax/laravel-mastodon-api.svg?branch=master)](https://travis-ci.org/kawax/laravel-mastodon-api)
 
 ## Requirements
-PHP >= 7.0
+- PHP >= 7.1
+- Laravel >= 5.8
 
 ## Installation
 
 ### Composer
 ```
 composer require revolution/laravel-mastodon-api
-```
-
-### Laravel
-
-Not necessary for Laravel >= 5.5
-
-`config/app.php`
-
-```
-'providers' => [
-        ...
-        Revolution\Mastodon\Providers\MastodonServiceProvider::class,
-        ...
-
-'aliases' => [
-        ...
-        'Mastodon' => Revolution\Mastodon\Facades\Mastodon::class,
-        ...
 ```
 
 ## Usage
@@ -135,9 +118,10 @@ dd($response);
 ### without Laravel, or without Facade
 
 ```
+use GuzzleHttp\Client;
 use Revolution\Mastodon\MastodonClient;
 
-$mastodon = new MastodonClient();
+$mastodon = new MastodonClient(new Client);
 
 $statuses = $mastodon->domain('https://example.com')
                      ->token('token')

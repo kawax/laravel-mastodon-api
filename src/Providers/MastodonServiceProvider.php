@@ -3,21 +3,15 @@
 namespace Revolution\Mastodon\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Support\DeferrableProvider;
 
 use GuzzleHttp\Client;
 
 use Revolution\Mastodon\Contracts\Factory;
 use Revolution\Mastodon\MastodonClient;
 
-class MastodonServiceProvider extends ServiceProvider
+class MastodonServiceProvider extends ServiceProvider implements DeferrableProvider
 {
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = true;
-
     /**
      * Boot the service provider.
      */
@@ -50,6 +44,9 @@ class MastodonServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return [Factory::class];
+        return [
+            MastodonClient::class,
+            Factory::class,
+        ];
     }
 }

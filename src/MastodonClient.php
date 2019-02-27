@@ -2,16 +2,16 @@
 
 namespace Revolution\Mastodon;
 
+use Closure;
+use BadMethodCallException;
+
 use Illuminate\Support\Arr;
+use Illuminate\Support\Traits\Macroable;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 
 use Revolution\Mastodon\Contracts\Factory;
-
-use Illuminate\Support\Traits\Macroable;
-use BadMethodCallException;
-use Closure;
 
 class MastodonClient implements Factory
 {

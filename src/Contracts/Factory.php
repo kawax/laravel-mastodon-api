@@ -7,10 +7,10 @@ use GuzzleHttp\ClientInterface;
 interface Factory
 {
     /**
-     * @param string $client_name
-     * @param string $redirect_uris
-     * @param string $scopes
-     * @param string $website
+     * @param  string  $client_name
+     * @param  string  $redirect_uris
+     * @param  string  $scopes
+     * @param  string  $website
      *
      * @return array
      */
@@ -22,25 +22,25 @@ interface Factory
     public function verifyCredentials(): array;
 
     /**
-     * @param string $method
-     * @param string $api
-     * @param array  $options
+     * @param  string  $method
+     * @param  string  $api
+     * @param  array  $options
      *
      * @return array
      */
     public function call(string $method, string $api, array $options = []): array;
 
     /**
-     * @param string $api
-     * @param array  $query
+     * @param  string  $api
+     * @param  array  $query
      *
      * @return array
      */
     public function get(string $api, array $query = []): array;
 
     /**
-     * @param string $api
-     * @param array  $params
+     * @param  string  $api
+     * @param  array  $params
      *
      * @return array
      */
@@ -52,35 +52,35 @@ interface Factory
     public function apiEndpoint(): string;
 
     /**
-     * @param ClientInterface $client
+     * @param  ClientInterface  $client
      *
      * @return Factory
      */
     public function setClient(ClientInterface $client): Factory;
 
     /**
-     * @param string $domain
+     * @param  string  $domain
      *
      * @return Factory
      */
     public function domain(string $domain): Factory;
 
     /**
-     * @param string $token
+     * @param  string  $token
      *
      * @return Factory
      */
     public function token(string $token): Factory;
 
     /**
-     * @param string $api_version
+     * @param  string  $api_version
      *
      * @return Factory
      */
     public function apiVersion(string $api_version): Factory;
 
     /**
-     * @param string $api_base
+     * @param  string  $api_base
      *
      * @return Factory
      */
@@ -92,32 +92,32 @@ interface Factory
     public function getResponse();
 
     /**
-     * @param int $account_id
-     * @param int $limit
-     * @param int $since_id
+     * @param  int  $account_id
+     * @param  int  $limit
+     * @param  int  $since_id
      *
      * @return array
      */
     public function statuses(int $account_id, int $limit = 40, int $since_id = null): array;
 
     /**
-     * @param string $status
-     * @param array  $options
+     * @param  string  $status
+     * @param  array  $options
      *
      * @return array
      */
     public function createStatus(string $status, array $options = []): array;
 
     /**
-     * @param int $status_id
+     * @param  int  $status_id
      *
      * @return array
      */
     public function status(int $status_id): array;
 
     /**
-     * @param string   $url
-     * @param callable $callback (string $event, string $data)
+     * @param  string  $url
+     * @param  callable  $callback  (string $event, string $data)
      */
     public function streaming(string $url, callable $callback);
 }

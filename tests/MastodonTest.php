@@ -9,7 +9,7 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 
-use Mastodon;
+use Revolution\Mastodon\Facades\Mastodon;
 
 class MastodonTest extends TestCase
 {
@@ -87,12 +87,11 @@ class MastodonTest extends TestCase
         $this->assertJson('{"test": "test"}', json_encode($response));
     }
 
-    /**
-     * @expectedException \BadMethodCallException
-     * @expectedExceptionMessage Method [test] does not exist.
-     */
     public function testRequestException()
     {
+        $this->expectException(\BadMethodCallException::class);
+        $this->expectExceptionMessage('Method [test] does not exist.');
+
         $response = $this->mastodon->test();
     }
 

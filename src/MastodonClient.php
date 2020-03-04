@@ -15,10 +15,10 @@ use Revolution\Mastodon\Contracts\Factory;
 
 class MastodonClient implements Factory
 {
-    use Traits\AppsTrait;
-    use Traits\AccountsTrait;
-    use Traits\StatusesTrait;
-    use Traits\StreamingTrait;
+    use Concerns\Apps;
+    use Concerns\Accounts;
+    use Concerns\Statuses;
+    use Concerns\Streaming;
 
     use Macroable;
 
@@ -55,26 +55,26 @@ class MastodonClient implements Factory
     /**
      * constructor.
      *
-     * @param Client $client
+     * @param  ClientInterface  $client
      */
-    public function __construct(Client $client)
+    public function __construct(ClientInterface $client)
     {
         $this->client = $client;
     }
 
     /**
-     * @param string $method
-     * @param string $api
-     * @param array  $options
+     * @param  string  $method
+     * @param  string  $api
+     * @param  array  $options
      *
      * @return array
      */
     public function call(string $method, string $api, array $options = []): array
     {
-        $url = $this->apiEndpoint() . $api;
+        $url = $this->apiEndpoint().$api;
 
-        if (!empty($this->token)) {
-            Arr::set($options, 'headers.Authorization', 'Bearer ' . $this->token);
+        if (! empty($this->token)) {
+            Arr::set($options, 'headers.Authorization', 'Bearer '.$this->token);
         }
 
         $this->response = $this->client->request($method, $url, $options);
@@ -83,8 +83,8 @@ class MastodonClient implements Factory
     }
 
     /**
-     * @param string $api
-     * @param array  $query
+     * @param  string  $api
+     * @param  array  $query
      *
      * @return array
      */
@@ -92,7 +92,7 @@ class MastodonClient implements Factory
     {
         $options = [];
 
-        if (!empty($query)) {
+        if (! empty($query)) {
             $options['query'] = $query;
         }
 
@@ -100,8 +100,8 @@ class MastodonClient implements Factory
     }
 
     /**
-     * @param string $api
-     * @param array  $params
+     * @param  string  $api
+     * @param  array  $params
      *
      * @return array
      */
@@ -109,7 +109,7 @@ class MastodonClient implements Factory
     {
         $options = [];
 
-        if (!empty($params)) {
+        if (! empty($params)) {
             $options['form_params'] = $params;
         }
 
@@ -121,14 +121,14 @@ class MastodonClient implements Factory
      */
     public function apiEndpoint(): string
     {
-        return $this->domain . $this->api_base . $this->api_version;
+        return $this->domain.$this->api_base.$this->api_version;
     }
 
     /**
-     * @deprecated PSR
+     * @return string
      * @see apiEndpoint()
      *
-     * @return string
+     * @deprecated PSR
      */
     public function api_endpoint(): string
     {
@@ -136,7 +136,7 @@ class MastodonClient implements Factory
     }
 
     /**
-     * @param ClientInterface $client
+     * @param  ClientInterface  $client
      *
      * @return Factory
      */
@@ -148,7 +148,7 @@ class MastodonClient implements Factory
     }
 
     /**
-     * @param string $domain
+     * @param  string  $domain
      *
      * @return Factory
      */
@@ -160,7 +160,7 @@ class MastodonClient implements Factory
     }
 
     /**
-     * @param string $token
+     * @param  string  $token
      *
      * @return Factory
      */
@@ -172,7 +172,7 @@ class MastodonClient implements Factory
     }
 
     /**
-     * @param string $api_version
+     * @param  string  $api_version
      *
      * @return Factory
      */
@@ -184,12 +184,12 @@ class MastodonClient implements Factory
     }
 
     /**
+     * @param  string  $api_version
+     *
+     * @return Factory
      * @deprecated PSR
      * @see apiVersion()
      *
-     * @param string $api_version
-     *
-     * @return Factory
      */
     public function api_version(string $api_version): Factory
     {
@@ -197,7 +197,7 @@ class MastodonClient implements Factory
     }
 
     /**
-     * @param string $api_base
+     * @param  string  $api_base
      *
      * @return Factory
      */
@@ -209,12 +209,12 @@ class MastodonClient implements Factory
     }
 
     /**
+     * @param  string  $api_base
+     *
+     * @return Factory
      * @deprecated PSR
      * @see apiBase()
      *
-     * @param string $api_base
-     *
-     * @return Factory
      */
     public function api_base(string $api_base): Factory
     {
@@ -232,12 +232,12 @@ class MastodonClient implements Factory
     /**
      * Magic call method.
      *
-     * @param string $method
-     * @param array  $parameters
-     *
-     * @throws \BadMethodCallException
+     * @param  string  $method
+     * @param  array  $parameters
      *
      * @return mixed
+     * @throws \BadMethodCallException
+     *
      */
     public function __call($method, $parameters)
     {

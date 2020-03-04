@@ -27,13 +27,11 @@ class MastodonServiceProvider extends ServiceProvider implements DeferrableProvi
      */
     public function register()
     {
-        $this->app->singleton(Factory::class, function ($app) {
-            return new MastodonClient(new Client());
-        });
-
-        $this->app->alias(
-            MastodonClient::class,
-            Factory::class
+        $this->app->singleton(
+            Factory::class,
+            function ($app) {
+                return new MastodonClient(new Client());
+            }
         );
     }
 
@@ -45,7 +43,6 @@ class MastodonServiceProvider extends ServiceProvider implements DeferrableProvi
     public function provides()
     {
         return [
-            MastodonClient::class,
             Factory::class,
         ];
     }

@@ -2,15 +2,12 @@
 
 namespace Revolution\Mastodon;
 
-use Closure;
 use BadMethodCallException;
-
-use Illuminate\Support\Arr;
-use Illuminate\Support\Traits\Macroable;
-
+use Closure;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
-
+use Illuminate\Support\Arr;
+use Illuminate\Support\Traits\Macroable;
 use Revolution\Mastodon\Contracts\Factory;
 
 class MastodonClient implements Factory
@@ -19,7 +16,6 @@ class MastodonClient implements Factory
     use Concerns\Accounts;
     use Concerns\Statuses;
     use Concerns\Streaming;
-
     use Macroable;
 
     /**
@@ -189,7 +185,6 @@ class MastodonClient implements Factory
      * @return Factory
      * @deprecated PSR
      * @see apiVersion()
-     *
      */
     public function api_version(string $api_version): Factory
     {
@@ -214,7 +209,6 @@ class MastodonClient implements Factory
      * @return Factory
      * @deprecated PSR
      * @see apiBase()
-     *
      */
     public function api_base(string $api_base): Factory
     {
@@ -237,7 +231,6 @@ class MastodonClient implements Factory
      *
      * @return mixed
      * @throws \BadMethodCallException
-     *
      */
     public function __call($method, $parameters)
     {

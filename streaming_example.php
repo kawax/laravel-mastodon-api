@@ -18,7 +18,7 @@ $mastodon->token($token)
              if ($event === 'update') {
                  $status = json_decode($data, true);
 
-                 echo strip_tags($status['account']['acct']) . PHP_EOL;
-                 echo strip_tags($status['content']) . PHP_EOL . PHP_EOL;
+                 echo strip_tags($status['account']['acct']).PHP_EOL;
+                 echo strip_tags($status['content']).PHP_EOL.PHP_EOL;
              }
          });

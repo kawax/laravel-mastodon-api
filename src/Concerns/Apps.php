@@ -5,7 +5,7 @@ namespace Revolution\Mastodon\Concerns;
 trait Apps
 {
     /**
-     * Register a new OAuth client app on the target instance
+     * Register a new OAuth client app on the target instance.
      *
      * @param  string  $client_name
      * @param  string  $redirect_uris

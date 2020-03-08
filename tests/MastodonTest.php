@@ -2,14 +2,12 @@
 
 namespace Tests;
 
-use Revolution\Mastodon\MastodonClient;
-
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
-
 use Revolution\Mastodon\Facades\Mastodon;
+use Revolution\Mastodon\MastodonClient;
 
 class MastodonTest extends TestCase
 {
@@ -141,7 +139,7 @@ class MastodonTest extends TestCase
 
     public function testStreaming()
     {
-        $res = 'event: update' . PHP_EOL . 'data: ' . json_encode(['test' => 'test']);
+        $res = 'event: update'.PHP_EOL.'data: '.json_encode(['test' => 'test']);
 
         $this->setClientHandler($res);
 

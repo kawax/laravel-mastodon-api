@@ -2,8 +2,8 @@
 
 namespace Tests;
 
-use Revolution\Mastodon\Providers\MastodonServiceProvider;
 use Revolution\Mastodon\Facades\Mastodon;
+use Revolution\Mastodon\Providers\MastodonServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {

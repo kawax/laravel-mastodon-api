@@ -2,11 +2,9 @@
 
 namespace Revolution\Mastodon\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Contracts\Support\DeferrableProvider;
-
 use GuzzleHttp\Client;
-
+use Illuminate\Contracts\Support\DeferrableProvider;
+use Illuminate\Support\ServiceProvider;
 use Revolution\Mastodon\Contracts\Factory;
 use Revolution\Mastodon\MastodonClient;
 

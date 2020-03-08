@@ -5,7 +5,7 @@ namespace Revolution\Mastodon\Concerns;
 trait Statuses
 {
     /**
-     * Get a list of statuses by a user
+     * Get a list of statuses by a user.
      *
      * @param  int  $account_id
      * @param  int  $limit
@@ -26,7 +26,7 @@ trait Statuses
     }
 
     /**
-     * Create new status
+     * Create new status.
      *
      * @param  string  $status
      * @param  array  $options
@@ -41,13 +41,13 @@ trait Statuses
             $options = [];
         }
 
-        $params = array_merge(['status' => $status,], $options);
+        $params = array_merge(['status' => $status], $options);
 
         return $this->post($url, $params);
     }
 
     /**
-     * Retrieve status
+     * Retrieve status.
      *
      * @param  int  $status_id
      *

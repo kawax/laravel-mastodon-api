@@ -56,35 +56,35 @@ interface Factory
      *
      * @return Factory
      */
-    public function setClient(ClientInterface $client): Factory;
+    public function setClient(ClientInterface $client): self;
 
     /**
      * @param  string  $domain
      *
      * @return Factory
      */
-    public function domain(string $domain): Factory;
+    public function domain(string $domain): self;
 
     /**
      * @param  string  $token
      *
      * @return Factory
      */
-    public function token(string $token): Factory;
+    public function token(string $token): self;
 
     /**
      * @param  string  $api_version
      *
      * @return Factory
      */
-    public function apiVersion(string $api_version): Factory;
+    public function apiVersion(string $api_version): self;
 
     /**
      * @param  string  $api_base
      *
      * @return Factory
      */
-    public function apiBase(string $api_base): Factory;
+    public function apiBase(string $api_base): self;
 
     /**
      * @return mixed

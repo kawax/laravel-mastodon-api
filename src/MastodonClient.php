@@ -2,8 +2,6 @@
 
 namespace Revolution\Mastodon;
 
-use BadMethodCallException;
-use Closure;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use Illuminate\Support\Arr;
@@ -16,7 +14,9 @@ class MastodonClient implements Factory
     use Concerns\Accounts;
     use Concerns\Statuses;
     use Concerns\Streaming;
-    use Macroable;
+    use Macroable {
+        __call as macroCall;
+    }
 
     /**
      * @var string
@@ -235,15 +235,9 @@ class MastodonClient implements Factory
     public function __call($method, $parameters)
     {
         if (method_exists($this->client, $method)) {
-            return call_user_func_array([$this->client, $method], $parameters);
+            return $this->client->{$method}(...array_values($parameters));
         }
 
-        if (static::hasMacro($method)) {
-            if (static::$macros[$method] instanceof Closure) {
-                return call_user_func_array(static::$macros[$method]->bindTo($this, static::class), $parameters);
-            }
-        }
-
-        throw new BadMethodCallException(sprintf('Method [%s] does not exist.', $method));
+        return $this->macroCall($method, $parameters);
     }
 }

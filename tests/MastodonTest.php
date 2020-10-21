@@ -88,7 +88,7 @@ class MastodonTest extends TestCase
     public function testRequestException()
     {
         $this->expectException(\BadMethodCallException::class);
-        $this->expectExceptionMessage('Method [test] does not exist.');
+        $this->expectExceptionMessage('does not exist.');
 
         $response = $this->mastodon->test();
     }

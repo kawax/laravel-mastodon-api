@@ -10,7 +10,7 @@ jobs:
       env: COMPOSER_OPTION=--ignore-platform-reqs
 
 before_script:
-  - travis_retry composer install --no-interaction --no-progress --no-suggest $COMPOSER_OPTION
+  - travis_retry composer install --no-interaction --no-progress $COMPOSER_OPTION
 
 script:
   - vendor/bin/phpunit

@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.com/kawax/laravel-mastodon-api.svg?branch=master)](https://travis-ci.com/kawax/laravel-mastodon-api)
 
 ## Requirements
-- PHP >= 7.2
+- PHP >= 7.3
 - Laravel >= 6.0
 
 ## Installation

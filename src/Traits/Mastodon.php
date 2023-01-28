@@ -10,7 +10,7 @@ trait Mastodon
     /**
      * @return Factory
      */
-    public function mastodon()
+    public function mastodon(): Factory
     {
         return Container::getInstance()->make(Factory::class)
                         ->domain($this->mastodonDomain())
@@ -20,10 +20,10 @@ trait Mastodon
     /**
      * @return string
      */
-    abstract protected function mastodonDomain();
+    abstract protected function mastodonDomain(): string;
 
     /**
      * @return string
      */
-    abstract protected function mastodonToken();
+    abstract protected function mastodonToken(): string;
 }

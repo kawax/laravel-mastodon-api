@@ -11,26 +11,13 @@ use Revolution\Mastodon\MastodonClient;
 class MastodonServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     /**
-     * Boot the service provider.
-     */
-    public function boot()
-    {
-        //
-    }
-
-    /**
      * Register the service provider.
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
-        $this->app->singleton(
-            Factory::class,
-            function ($app) {
-                return new MastodonClient(new Client());
-            }
-        );
+        $this->app->singleton(Factory::class, fn ($app) => new MastodonClient(new Client()));
     }
 
     /**
@@ -38,7 +25,7 @@ class MastodonServiceProvider extends ServiceProvider implements DeferrableProvi
      *
      * @return string[]
      */
-    public function provides()
+    public function provides(): array
     {
         return [
             Factory::class,

@@ -14,12 +14,12 @@ class MastodonTest extends TestCase
     /**
      * @var MastodonClient
      */
-    protected $mastodon;
+    protected MastodonClient $mastodon;
 
     /**
      * @var Client
      */
-    protected $client;
+    protected Client $client;
 
     public function setUp(): void
     {

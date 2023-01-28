@@ -2,8 +2,9 @@
 
 namespace Revolution\Mastodon\Concerns;
 
-use GuzzleHttp\Psr7;
+use GuzzleHttp\Psr7\CachingStream;
 use Illuminate\Support\Str;
+use GuzzleHttp\Psr7\Utils;
 
 trait Streaming
 {
@@ -11,7 +12,7 @@ trait Streaming
      * @param  string  $url
      * @param  callable  $callback  (string $event, string $data)
      */
-    public function streaming(string $url, callable $callback)
+    public function streaming(string $url, callable $callback): void
     {
         $options = [
             'headers' => [
@@ -24,16 +25,16 @@ trait Streaming
 
         $body = $response->getBody();
 
-        $stream = new Psr7\CachingStream($body);
+        $stream = new CachingStream($body);
 
         while (! $stream->eof()) {
-            $line = Psr7\readline($stream);
+            $line = Utils::readLine($stream);
             $line = trim($line);
 
             if (Str::startsWith($line, 'event: ')) {
                 $event = substr($line, 7);
 
-                $data = substr(trim(Psr7\readline($stream)), 6);
+                $data = substr(trim(Utils::readLine($stream)), 6);
 
                 $callback($event, $data);
             }

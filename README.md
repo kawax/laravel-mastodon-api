@@ -1,10 +1,8 @@
 # Mastodon API for Laravel
 
-[![Build Status](https://travis-ci.com/kawax/laravel-mastodon-api.svg?branch=master)](https://travis-ci.com/kawax/laravel-mastodon-api)
-
 ## Requirements
-- PHP >= 7.3
-- Laravel >= 6.0
+- PHP >= 8.0
+- Laravel >= 9.0
 
 ## Installation
 

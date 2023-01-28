@@ -89,7 +89,7 @@ interface Factory
     /**
      * @return mixed
      */
-    public function getResponse();
+    public function getResponse(): mixed;
 
     /**
      * @param  int  $account_id
@@ -119,5 +119,5 @@ interface Factory
      * @param  string  $url
      * @param  callable  $callback  (string $event, string $data)
      */
-    public function streaming(string $url, callable $callback);
+    public function streaming(string $url, callable $callback): void;
 }

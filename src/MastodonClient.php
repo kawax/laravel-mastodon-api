@@ -21,32 +21,32 @@ class MastodonClient implements Factory
     /**
      * @var string
      */
-    protected $api_version = 'v1';
+    protected string $api_version = 'v1';
 
     /**
      * @var Client
      */
-    protected $client;
+    protected ClientInterface $client;
 
     /**
      * @var string
      */
-    protected $domain;
+    protected string $domain;
 
     /**
      * @var string
      */
-    protected $token;
+    protected string $token;
 
     /**
      * @var string
      */
-    protected $api_base = '/api/';
+    protected string $api_base = '/api/';
 
     /**
      * @var mixed|\Psr\Http\Message\ResponseInterface
      */
-    protected $response;
+    protected mixed $response = null;
 
     /**
      * constructor.
@@ -121,17 +121,6 @@ class MastodonClient implements Factory
     }
 
     /**
-     * @return string
-     * @see apiEndpoint()
-     *
-     * @deprecated PSR
-     */
-    public function api_endpoint(): string
-    {
-        return $this->apiEndpoint();
-    }
-
-    /**
      * @param  ClientInterface  $client
      *
      * @return Factory
@@ -180,18 +169,6 @@ class MastodonClient implements Factory
     }
 
     /**
-     * @param  string  $api_version
-     *
-     * @return Factory
-     * @deprecated PSR
-     * @see apiVersion()
-     */
-    public function api_version(string $api_version): Factory
-    {
-        return $this->apiVersion($api_version);
-    }
-
-    /**
      * @param  string  $api_base
      *
      * @return Factory
@@ -204,21 +181,9 @@ class MastodonClient implements Factory
     }
 
     /**
-     * @param  string  $api_base
-     *
-     * @return Factory
-     * @deprecated PSR
-     * @see apiBase()
-     */
-    public function api_base(string $api_base): Factory
-    {
-        return $this->apiBase($api_base);
-    }
-
-    /**
      * @return mixed
      */
-    public function getResponse()
+    public function getResponse(): mixed
     {
         return $this->response;
     }

@@ -10,7 +10,6 @@ trait Statuses
      * @param  int  $account_id
      * @param  int  $limit
      * @param  int  $since_id
-     *
      * @return array
      */
     public function statuses(int $account_id, int $limit = 40, int $since_id = null): array
@@ -30,7 +29,6 @@ trait Statuses
      *
      * @param  string  $status
      * @param  array  $options
-     *
      * @return array
      */
     public function createStatus(string $status, array $options = null): array
@@ -50,7 +48,6 @@ trait Statuses
      * Retrieve status.
      *
      * @param  int  $status_id
-     *
      * @return array
      */
     public function status(int $status_id): array

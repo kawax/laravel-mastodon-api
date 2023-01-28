@@ -3,8 +3,8 @@
 namespace Revolution\Mastodon\Concerns;
 
 use GuzzleHttp\Psr7\CachingStream;
-use Illuminate\Support\Str;
 use GuzzleHttp\Psr7\Utils;
+use Illuminate\Support\Str;
 
 trait Streaming
 {

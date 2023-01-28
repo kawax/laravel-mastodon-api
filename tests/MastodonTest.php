@@ -29,7 +29,7 @@ class MastodonTest extends TestCase
     }
 
     /**
-     * @param mixed $body
+     * @param  mixed  $body
      */
     public function setClientHandler($body)
     {

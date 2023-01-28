@@ -62,7 +62,6 @@ class MastodonClient implements Factory
      * @param  string  $method
      * @param  string  $api
      * @param  array  $options
-     *
      * @return array
      */
     public function call(string $method, string $api, array $options = []): array
@@ -81,7 +80,6 @@ class MastodonClient implements Factory
     /**
      * @param  string  $api
      * @param  array  $query
-     *
      * @return array
      */
     public function get(string $api, array $query = []): array
@@ -98,7 +96,6 @@ class MastodonClient implements Factory
     /**
      * @param  string  $api
      * @param  array  $params
-     *
      * @return array
      */
     public function post(string $api, array $params = []): array
@@ -122,7 +119,6 @@ class MastodonClient implements Factory
 
     /**
      * @param  ClientInterface  $client
-     *
      * @return Factory
      */
     public function setClient(ClientInterface $client): Factory
@@ -134,7 +130,6 @@ class MastodonClient implements Factory
 
     /**
      * @param  string  $domain
-     *
      * @return Factory
      */
     public function domain(string $domain): Factory
@@ -146,7 +141,6 @@ class MastodonClient implements Factory
 
     /**
      * @param  string  $token
-     *
      * @return Factory
      */
     public function token(string $token): Factory
@@ -158,7 +152,6 @@ class MastodonClient implements Factory
 
     /**
      * @param  string  $api_version
-     *
      * @return Factory
      */
     public function apiVersion(string $api_version): Factory
@@ -170,7 +163,6 @@ class MastodonClient implements Factory
 
     /**
      * @param  string  $api_base
-     *
      * @return Factory
      */
     public function apiBase(string $api_base): Factory
@@ -193,8 +185,8 @@ class MastodonClient implements Factory
      *
      * @param  string  $method
      * @param  array  $parameters
-     *
      * @return mixed
+     *
      * @throws \BadMethodCallException
      */
     public function __call($method, $parameters)

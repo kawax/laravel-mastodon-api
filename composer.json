@@ -37,7 +37,10 @@
     "laravel": {
       "providers": [
         "Revolution\\Mastodon\\Providers\\MastodonServiceProvider"
-      ]
+      ],
+      "aliases": {
+        "Mastodon": "Revolution\\Mastodon\\Facades\\Mastodon"
+      }
     }
   },
   "minimum-stability": "dev"

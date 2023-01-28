@@ -11,7 +11,6 @@ trait Apps
      * @param  string  $redirect_uris
      * @param  string  $scopes
      * @param  string  $website
-     *
      * @return array
      */
     public function createApp(string $client_name, string $redirect_uris, string $scopes, string $website = ''): array

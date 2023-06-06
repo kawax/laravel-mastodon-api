@@ -31,7 +31,7 @@ class MastodonTest extends TestCase
     /**
      * @param  mixed  $body
      */
-    public function setClientHandler($body)
+    public function setClientHandler(mixed $body): void
     {
         $mock = new MockHandler([
             new Response(200, [], $body),

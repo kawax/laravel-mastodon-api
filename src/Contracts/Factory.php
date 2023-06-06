@@ -3,6 +3,7 @@
 namespace Revolution\Mastodon\Contracts;
 
 use GuzzleHttp\ClientInterface;
+use Psr\Http\Message\ResponseInterface;
 
 interface Factory
 {
@@ -51,36 +52,33 @@ interface Factory
      * @param  ClientInterface  $client
      * @return Factory
      */
-    public function setClient(ClientInterface $client): self;
+    public function setClient(ClientInterface $client): static;
 
     /**
      * @param  string  $domain
      * @return Factory
      */
-    public function domain(string $domain): self;
+    public function domain(string $domain): static;
 
     /**
      * @param  string  $token
      * @return Factory
      */
-    public function token(string $token): self;
+    public function token(string $token): static;
 
     /**
      * @param  string  $api_version
      * @return Factory
      */
-    public function apiVersion(string $api_version): self;
+    public function apiVersion(string $api_version): static;
 
     /**
      * @param  string  $api_base
      * @return Factory
      */
-    public function apiBase(string $api_base): self;
+    public function apiBase(string $api_base): static;
 
-    /**
-     * @return mixed
-     */
-    public function getResponse(): mixed;
+    public function getResponse(): ?ResponseInterface;
 
     /**
      * @param  int  $account_id
@@ -105,7 +103,7 @@ interface Factory
 
     /**
      * @param  string  $url
-     * @param  callable  $callback  (string $event, string $data)
+     * @param  callable  $callback (string $event, string $data)
      */
     public function streaming(string $url, callable $callback): void;
 }

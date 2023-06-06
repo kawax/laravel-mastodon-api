@@ -2,10 +2,11 @@
 
 namespace Revolution\Mastodon;
 
-use GuzzleHttp\Client;
+use BadMethodCallException;
 use GuzzleHttp\ClientInterface;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Traits\Macroable;
+use Psr\Http\Message\ResponseInterface;
 use Revolution\Mastodon\Contracts\Factory;
 
 class MastodonClient implements Factory
@@ -18,164 +19,99 @@ class MastodonClient implements Factory
         __call as macroCall;
     }
 
-    /**
-     * @var string
-     */
     protected string $api_version = 'v1';
 
-    /**
-     * @var Client
-     */
     protected ClientInterface $client;
 
-    /**
-     * @var string
-     */
     protected string $domain;
 
-    /**
-     * @var string
-     */
     protected string $token;
 
-    /**
-     * @var string
-     */
     protected string $api_base = '/api/';
 
-    /**
-     * @var mixed|\Psr\Http\Message\ResponseInterface
-     */
-    protected mixed $response = null;
+    protected ?ResponseInterface $response = null;
 
-    /**
-     * constructor.
-     *
-     * @param  ClientInterface  $client
-     */
     public function __construct(ClientInterface $client)
     {
         $this->client = $client;
     }
 
-    /**
-     * @param  string  $method
-     * @param  string  $api
-     * @param  array  $options
-     * @return array
-     */
     public function call(string $method, string $api, array $options = []): array
     {
         $url = $this->apiEndpoint().$api;
 
-        if (! empty($this->token)) {
+        if (!empty($this->token)) {
             Arr::set($options, 'headers.Authorization', 'Bearer '.$this->token);
         }
 
         $this->response = $this->client->request($method, $url, $options);
 
-        return json_decode(optional($this->response)->getBody(), true);
+        return json_decode($this->response->getBody(), true);
     }
 
-    /**
-     * @param  string  $api
-     * @param  array  $query
-     * @return array
-     */
     public function get(string $api, array $query = []): array
     {
         $options = [];
 
-        if (! empty($query)) {
+        if (!empty($query)) {
             $options['query'] = $query;
         }
 
         return $this->call('GET', $api, $options);
     }
 
-    /**
-     * @param  string  $api
-     * @param  array  $params
-     * @return array
-     */
     public function post(string $api, array $params = []): array
     {
         $options = [];
 
-        if (! empty($params)) {
+        if (!empty($params)) {
             $options['form_params'] = $params;
         }
 
         return $this->call('POST', $api, $options);
     }
 
-    /**
-     * @return string
-     */
     public function apiEndpoint(): string
     {
         return $this->domain.$this->api_base.$this->api_version;
     }
 
-    /**
-     * @param  ClientInterface  $client
-     * @return Factory
-     */
-    public function setClient(ClientInterface $client): Factory
+    public function setClient(ClientInterface $client): static
     {
         $this->client = $client;
 
         return $this;
     }
 
-    /**
-     * @param  string  $domain
-     * @return Factory
-     */
-    public function domain(string $domain): Factory
+    public function domain(string $domain): static
     {
         $this->domain = trim($domain, '/');
 
         return $this;
     }
 
-    /**
-     * @param  string  $token
-     * @return Factory
-     */
-    public function token(string $token): Factory
+    public function token(string $token): static
     {
         $this->token = $token;
 
         return $this;
     }
 
-    /**
-     * @param  string  $api_version
-     * @return Factory
-     */
-    public function apiVersion(string $api_version): Factory
+    public function apiVersion(string $api_version): static
     {
         $this->api_version = $api_version;
 
         return $this;
     }
 
-    /**
-     * @param  string  $api_base
-     * @return Factory
-     */
-    public function apiBase(string $api_base): Factory
+    public function apiBase(string $api_base): static
     {
         $this->api_base = $api_base;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getResponse(): mixed
+    public function getResponse(): ?ResponseInterface
     {
         return $this->response;
     }
@@ -187,7 +123,7 @@ class MastodonClient implements Factory
      * @param  array  $parameters
      * @return mixed
      *
-     * @throws \BadMethodCallException
+     * @throws BadMethodCallException
      */
     public function __call($method, $parameters)
     {

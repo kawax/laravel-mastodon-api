@@ -40,7 +40,7 @@ class MastodonClient implements Factory
     {
         $url = $this->apiEndpoint().$api;
 
-        if (!empty($this->token)) {
+        if (! empty($this->token)) {
             Arr::set($options, 'headers.Authorization', 'Bearer '.$this->token);
         }
 
@@ -53,7 +53,7 @@ class MastodonClient implements Factory
     {
         $options = [];
 
-        if (!empty($query)) {
+        if (! empty($query)) {
             $options['query'] = $query;
         }
 
@@ -64,7 +64,7 @@ class MastodonClient implements Factory
     {
         $options = [];
 
-        if (!empty($params)) {
+        if (! empty($params)) {
             $options['form_params'] = $params;
         }
 

@@ -103,7 +103,7 @@ interface Factory
 
     /**
      * @param  string  $url
-     * @param  callable  $callback (string $event, string $data)
+     * @param  callable  $callback  (string $event, string $data)
      */
     public function streaming(string $url, callable $callback): void;
 }

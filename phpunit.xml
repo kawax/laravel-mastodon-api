@@ -4,17 +4,19 @@
          bootstrap="vendor/autoload.php"
          colors="true"
 >
-  <coverage>
-    <include>
-      <directory suffix=".php">src/</directory>
-    </include>
-      <report>
-          <clover outputFile="build/logs/clover.xml"/>
-      </report>
-  </coverage>
-  <testsuites>
-    <testsuite name="Mastodon Test Suite">
-      <directory>tests</directory>
-    </testsuite>
-  </testsuites>
+    <source>
+        <include>
+            <directory>src/</directory>
+        </include>
+    </source>
+    <coverage>
+        <report>
+            <clover outputFile="build/logs/clover.xml"/>
+        </report>
+    </coverage>
+    <testsuites>
+        <testsuite name="Test Suite">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
 </phpunit>

@@ -6,15 +6,10 @@ trait Statuses
 {
     /**
      * Get a list of statuses by a user.
-     *
-     * @param  int  $account_id
-     * @param  int  $limit
-     * @param  int  $since_id
-     * @return array
      */
     public function statuses(int $account_id, int $limit = 40, int $since_id = null): array
     {
-        $url = "/accounts/${account_id}/statuses";
+        $url = "/accounts/$account_id/statuses";
 
         $query = [
             'limit'    => $limit,
@@ -26,10 +21,6 @@ trait Statuses
 
     /**
      * Create new status.
-     *
-     * @param  string  $status
-     * @param  array  $options
-     * @return array
      */
     public function createStatus(string $status, array $options = null): array
     {
@@ -46,13 +37,10 @@ trait Statuses
 
     /**
      * Retrieve status.
-     *
-     * @param  int  $status_id
-     * @return array
      */
     public function status(int $status_id): array
     {
-        $url = "/statuses/${status_id}";
+        $url = "/statuses/$status_id";
 
         return $this->get($url);
     }

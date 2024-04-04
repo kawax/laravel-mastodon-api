@@ -12,8 +12,6 @@ class MastodonServiceProvider extends ServiceProvider implements DeferrableProvi
 {
     /**
      * Register the service provider.
-     *
-     * @return void
      */
     public function register(): void
     {
@@ -22,8 +20,6 @@ class MastodonServiceProvider extends ServiceProvider implements DeferrableProvi
 
     /**
      * Get the services provided by the provider.
-     *
-     * @return string[]
      */
     public function provides(): array
     {

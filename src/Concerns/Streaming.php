@@ -9,8 +9,7 @@ use Illuminate\Support\Str;
 trait Streaming
 {
     /**
-     * @param  string  $url
-     * @param  callable  $callback  (string $event, string $data)
+     * @param  callable(string $event, string $data): void  $callback
      */
     public function streaming(string $url, callable $callback): void
     {
@@ -18,7 +17,7 @@ trait Streaming
             'headers' => [
                 'Authorization' => 'Bearer '.$this->token,
             ],
-            'stream'  => true,
+            'stream' => true,
         ];
 
         $response = $this->request('GET', $url, $options);

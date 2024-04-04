@@ -11,14 +11,14 @@ $url = '';
 $mastodon = new Revolution\Mastodon\MastodonClient(new GuzzleHttp\Client());
 
 $mastodon->token($token)
-         ->streaming($url, function ($event, $data) {
-             //event: update|notification|delete
-             //data: JSON
+    ->streaming($url, function (string $event, string $data) {
+        //event: update|notification|delete
+        //data: JSON
 
-             if ($event === 'update') {
-                 $status = json_decode($data, true);
+        if ($event === 'update') {
+            $status = json_decode($data, true);
 
-                 echo strip_tags($status['account']['acct']).PHP_EOL;
-                 echo strip_tags($status['content']).PHP_EOL.PHP_EOL;
-             }
-         });
+            echo strip_tags($status['account']['acct']).PHP_EOL;
+            echo strip_tags($status['content']).PHP_EOL.PHP_EOL;
+        }
+    });

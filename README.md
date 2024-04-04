@@ -21,7 +21,7 @@ composer require revolution/laravel-mastodon-api
 
 #### By API
 ```php
-use Mastodon;
+use Revolution\Mastodon\Facades\Mastodon;
 
 class MastodonController
 {
@@ -51,6 +51,8 @@ Save account info.(`id`, `token`, `username`, `acct`...and more.)
 
 ### Get statuses
 ```php
+use Revolution\Mastodon\Facades\Mastodon;
+
 $statuses = Mastodon::domain('https://example.com')
                     ->token('token')
                     ->statuses($account_id);
@@ -60,6 +62,8 @@ dd($statuses);
 
 ### Get one status
 ```php
+use Revolution\Mastodon\Facades\Mastodon;
+
 $status = Mastodon::domain('https://example.com')
                   ->token('token')
                   ->status($status_id);
@@ -69,6 +73,8 @@ dd($status);
 
 ### Post status
 ```php
+use Revolution\Mastodon\Facades\Mastodon;
+
 Mastodon::domain('https://example.com')->token('token');
 $response = Mastodon::createStatus('test1');
 $response = Mastodon::createStatus('test2', ['visibility' => 'unlisted']);
@@ -78,12 +84,16 @@ dd($response);
 
 ### Any API by `get` or `post` method
 ```php
+use Revolution\Mastodon\Facades\Mastodon;
+
 $response = Mastodon::domain('https://example.com')
                     ->token('token')
                     ->get('/timelines/public', ['local' => true]);
 ```
 
 ```php
+use Revolution\Mastodon\Facades\Mastodon;
+
 $response = Mastodon::domain('https://example.com')
                     ->token('token')
                     ->post('/follows', ['uri' => '']);
@@ -91,6 +101,8 @@ $response = Mastodon::domain('https://example.com')
 
 ### Any API can call by `call` method
 ```php
+use Revolution\Mastodon\Facades\Mastodon;
+
 $response = Mastodon::domain('https://example.com')
                     ->token('token')
                     ->call('DELETE', '/statuses/1');
@@ -100,6 +112,8 @@ $response = Mastodon::domain('https://example.com')
 Set all data by your self.
 
 ```php
+use Revolution\Mastodon\Facades\Mastodon;
+
 $url = 'https://example.com/api/v1/instance';
 
 $options = [
@@ -115,7 +129,7 @@ dd($response);
 
 ### without Laravel, or without Facade
 
-```
+```php
 use GuzzleHttp\Client;
 use Revolution\Mastodon\MastodonClient;
 
@@ -140,4 +154,3 @@ php ./streaming_example.php
 
 ## LICENSE
 MIT  
-Copyright kawax

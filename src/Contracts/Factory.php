@@ -38,8 +38,7 @@ interface Factory
     public function status(int $status_id): array;
 
     /**
-     * @param  string  $url
-     * @param  callable  $callback  (string $event, string $data)
+     * @param  callable(string $event, string $data): void  $callback
      */
     public function streaming(string $url, callable $callback): void;
 }

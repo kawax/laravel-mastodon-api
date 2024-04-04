@@ -12,7 +12,7 @@ trait Statuses
         $url = "/accounts/$account_id/statuses";
 
         $query = [
-            'limit'    => $limit,
+            'limit' => $limit,
             'since_id' => $since_id,
         ];
 

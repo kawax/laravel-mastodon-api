@@ -47,6 +47,7 @@ class MastodonClient implements Factory
         $this->response = $this->client->request($method, $url, $options);
 
         $response = json_decode($this->response->getBody(), true);
+        
         return is_array($response) ? $response : null;
     }
 

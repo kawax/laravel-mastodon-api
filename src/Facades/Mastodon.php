@@ -17,6 +17,7 @@ use Revolution\Mastodon\Contracts\Factory;
  * @method static array createStatus(string $status, array $options = [])
  * @method static array status(int $status_id)
  * @method static void streaming(string $url, callable $callback)
+ * @method static ?array call(string $method, string $api, array $options = [])
  */
 class Mastodon extends Facade
 {

@@ -36,7 +36,7 @@ class MastodonClient implements Factory
         $this->client = $client;
     }
 
-    public function call(string $method, string $api, array $options = []): array
+    public function call(string $method, string $api, array $options = []): ?array
     {
         $url = $this->apiEndpoint().$api;
 
@@ -46,7 +46,9 @@ class MastodonClient implements Factory
 
         $this->response = $this->client->request($method, $url, $options);
 
-        return json_decode($this->response->getBody(), true);
+        $response = json_decode($this->response->getBody(), true);
+
+        return is_array($response) ? $response : null;
     }
 
     public function get(string $api, array $query = []): array

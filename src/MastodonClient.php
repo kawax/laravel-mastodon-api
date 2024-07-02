@@ -4,7 +4,8 @@ namespace Revolution\Mastodon;
 
 use BadMethodCallException;
 use GuzzleHttp\ClientInterface;
-use Illuminate\Support\Arr;
+use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Traits\Macroable;
 use Psr\Http\Message\ResponseInterface;
 use Revolution\Mastodon\Contracts\Factory;
@@ -23,9 +24,9 @@ class MastodonClient implements Factory
 
     protected ClientInterface $client;
 
-    protected string $domain;
+    protected string $domain = '';
 
-    protected string $token;
+    protected string $token = '';
 
     protected string $api_base = '/api/';
 
@@ -38,15 +39,14 @@ class MastodonClient implements Factory
 
     public function call(string $method, string $api, array $options = []): array
     {
-        $url = $this->apiEndpoint().$api;
+        $response = Http::setClient($this->client)
+            ->baseUrl($this->apiEndpoint())
+            ->when(filled($this->token), fn (PendingRequest $client) => $client->withToken($this->token))
+            ->send($method, $api, $options);
 
-        if (! empty($this->token)) {
-            Arr::set($options, 'headers.Authorization', 'Bearer '.$this->token);
-        }
+        $this->response = $response->toPsrResponse();
 
-        $this->response = $this->client->request($method, $url, $options);
-
-        return json_decode($this->response->getBody(), true) ?? [];
+        return $response->json() ?? [];
     }
 
     public function get(string $api, array $query = []): array

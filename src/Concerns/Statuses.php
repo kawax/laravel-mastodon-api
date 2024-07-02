@@ -26,11 +26,7 @@ trait Statuses
     {
         $url = '/statuses';
 
-        if (empty($options)) {
-            $options = [];
-        }
-
-        $params = array_merge(['status' => $status], $options);
+        $params = array_merge(['status' => $status], $options ?? []);
 
         return $this->post($url, $params);
     }

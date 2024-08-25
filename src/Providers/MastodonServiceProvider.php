@@ -15,7 +15,7 @@ class MastodonServiceProvider extends ServiceProvider implements DeferrableProvi
      */
     public function register(): void
     {
-        $this->app->singleton(Factory::class, fn ($app) => new MastodonClient(new Client()));
+        $this->app->scoped(Factory::class, fn ($app) => new MastodonClient(new Client()));
     }
 
     /**

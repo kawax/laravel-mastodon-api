@@ -11,6 +11,7 @@ trait Streaming
 {
     /**
      * @param  callable(string $event, string $data): void  $callback
+     *
      * @throws GuzzleException
      */
     public function streaming(string $url, callable $callback): void

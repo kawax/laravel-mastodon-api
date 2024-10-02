@@ -5,6 +5,7 @@ namespace Revolution\Mastodon\Facades;
 use Illuminate\Support\Facades\Facade;
 use Psr\Http\Message\ResponseInterface;
 use Revolution\Mastodon\Contracts\Factory;
+use Revolution\Mastodon\MastodonClient;
 
 /**
  * @method static array createApp(string $client_name, string $redirect_uris, string $scopes, string $website = '')
@@ -17,6 +18,8 @@ use Revolution\Mastodon\Contracts\Factory;
  * @method static array createStatus(string $status, array $options = [])
  * @method static array status(int $status_id)
  * @method static void streaming(string $url, callable $callback)
+ *
+ * @mixin MastodonClient
  */
 class Mastodon extends Facade
 {

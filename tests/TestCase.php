@@ -2,7 +2,6 @@
 
 namespace Tests;
 
-use Revolution\Mastodon\Facades\Mastodon;
 use Revolution\Mastodon\Providers\MastodonServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
@@ -16,9 +15,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
     protected function getPackageAliases($app): array
     {
-        return [
-            'Mastodon' => Mastodon::class,
-        ];
+        return [];
     }
 
     /**

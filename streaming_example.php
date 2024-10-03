@@ -8,7 +8,7 @@ $token = '';
 // https://example.com/api/v1/streaming/public
 $url = '';
 
-$mastodon = new Revolution\Mastodon\MastodonClient(new GuzzleHttp\Client());
+$mastodon = new Revolution\Mastodon\MastodonClient();
 
 $mastodon->token($token)
     ->streaming($url, function (string $event, string $data) {

@@ -1,7 +1,7 @@
 # Mastodon API for Laravel
 
 ## Requirements
-- PHP >= 8.1
+- PHP >= 8.2
 - Laravel >= 10.0
 
 ## Installation
@@ -106,38 +106,6 @@ use Revolution\Mastodon\Facades\Mastodon;
 $response = Mastodon::domain('https://example.com')
                     ->token('token')
                     ->call('DELETE', '/statuses/1');
-```
-
-### Any request through Guzzle
-Set all data by your self.
-
-```php
-use Revolution\Mastodon\Facades\Mastodon;
-
-$url = 'https://example.com/api/v1/instance';
-
-$options = [
-    'headers' => [
-        'Authorization' => 'Bearer ' . $token,
-    ]
-]
-
-$response = Mastodon::request('GET', $url, $options);
-
-dd($response);
-```
-
-### without Laravel, or without Facade
-
-```php
-use GuzzleHttp\Client;
-use Revolution\Mastodon\MastodonClient;
-
-$mastodon = new MastodonClient(new Client);
-
-$statuses = $mastodon->domain('https://example.com')
-                     ->token('token')
-                     ->statuses($account_id);
 ```
 
 ### Other methods

@@ -2,10 +2,10 @@
 
 namespace Revolution\Mastodon;
 
-use BadMethodCallException;
 use GuzzleHttp\ClientInterface;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Support\Traits\Macroable;
 use Psr\Http\Message\ResponseInterface;
 use Revolution\Mastodon\Contracts\Factory;
@@ -16,13 +16,12 @@ class MastodonClient implements Factory
     use Concerns\Accounts;
     use Concerns\Statuses;
     use Concerns\Streaming;
-    use Macroable {
-        __call as macroCall;
-    }
+    use Macroable;
+    use Conditionable;
 
     protected string $api_version = 'v1';
 
-    protected ClientInterface $client;
+    protected ?ClientInterface $client = null;
 
     protected string $domain = '';
 
@@ -32,15 +31,10 @@ class MastodonClient implements Factory
 
     protected ?ResponseInterface $response = null;
 
-    public function __construct(ClientInterface $client)
-    {
-        $this->client = $client;
-    }
-
     public function call(string $method, string $api, array $options = []): array
     {
-        $response = Http::setClient($this->client)
-            ->baseUrl($this->apiEndpoint())
+        $response = Http::baseUrl($this->apiEndpoint())
+            ->when(isset($this->client), fn (PendingRequest $client) => $client->setClient($this->client))
             ->when(filled($this->token), fn (PendingRequest $client) => $client->withToken($this->token))
             ->send($method, $api, $options);
 
@@ -90,7 +84,7 @@ class MastodonClient implements Factory
         return $this;
     }
 
-    public function token(string $token): static
+    public function token(#[\SensitiveParameter] string $token): static
     {
         $this->token = $token;
 
@@ -114,23 +108,5 @@ class MastodonClient implements Factory
     public function getResponse(): ?ResponseInterface
     {
         return $this->response;
-    }
-
-    /**
-     * Magic call method.
-     *
-     * @param  string  $method
-     * @param  array  $parameters
-     * @return mixed
-     *
-     * @throws BadMethodCallException
-     */
-    public function __call($method, $parameters)
-    {
-        if (method_exists($this->client, $method)) {
-            return $this->client->{$method}(...array_values($parameters));
-        }
-
-        return $this->macroCall($method, $parameters);
     }
 }

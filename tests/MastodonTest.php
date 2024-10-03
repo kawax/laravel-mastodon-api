@@ -31,7 +31,7 @@ class MastodonTest extends TestCase
         $handler = HandlerStack::create($mock);
         $client = new Client(['handler' => $handler]);
 
-        $this->mastodon = new MastodonClient($client);
+        $this->mastodon = (new MastodonClient())->setClient($client);
     }
 
     public function testCall()
@@ -60,13 +60,6 @@ class MastodonTest extends TestCase
         $response = $this->mastodon->domain('https://example.com')
             ->token('token')
             ->post('/', ['params' => 'test']);
-
-        $this->assertJson('{"test": "test"}', json_encode($response));
-    }
-
-    public function testRequest()
-    {
-        $response = $this->mastodon->request('get', '/', ['query' => 'test']);
 
         $this->assertJson('{"test": "test"}', json_encode($response));
     }
@@ -148,7 +141,7 @@ class MastodonTest extends TestCase
             return $this->get('/instance');
         });
 
-        $mastodon = new MastodonClient(new Client());
+        $mastodon = new MastodonClient();
 
         $this->assertTrue(MastodonClient::hasMacro('instance'));
         $this->assertTrue(is_callable(MastodonClient::class, 'instance'));
